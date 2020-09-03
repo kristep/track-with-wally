@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Statistics
+{% endblock %}
+
+{% block content %}
+    <!-- TOP NAVBAR -->
+    {% include 'includes/_navbar.html' %}
+
+    <div class="statistics_cont">
+        <div class="graphs">
+            <embed type="image/svg+xml" src={{chart|safe}} style='width:800px'/>
+        
+
+        </div>
+    
+
+
+
+    </div>
+{% endblock %}
+

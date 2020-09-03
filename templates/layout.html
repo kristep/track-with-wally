@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- bootstrap css -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+  <!-- custom css -->
+  <link href="/static/styles.css" rel="stylesheet">
+  <!-- bootstrap scripts -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+  <!-- fontawesome -->
+  <script src="https://kit.fontawesome.com/45cc682c27.js" crossorigin="anonymous"></script>
+
+  <title>Wally Tracker: {% block title %}{% endblock %}</title>
+
+</head>
+
+
+<body>
+  <div class="d-flex toggled" id="wrapper">
+    <!-- sidebar -->
+    {% include 'includes/_sidebar.html' %}
+    <!-- PAGE CONTENT WRAPPER  -->
+    <main class="page_content">
+      <div class="content container-fluid">
+        <!-- FLASH MESSAGE  -->
+        <!-- {% include 'includes/_messages.html' %} -->
+        <!-- MAIN CONTENT from templates  -->
+        {% block content %}{% endblock %}
+      </div> 
+    </main>
+  </div>
+
+  <!-- Toggle menu js -->
+  <script>
+    document.querySelector('#menu-toggle').addEventListener('click', (e) => {
+      e.preventDefault();
+      document.querySelector('#wrapper').classList.toggle("toggled")
+    })
+  </script>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Account settings
+{% endblock %}
+
+{% block content %}
+  <!-- TOP NAVBAR -->
+  {% include 'includes/_navbar.html' %}
+  {% include 'includes/_messages.html' %}
+
+  <div class="acc_settings">
+    <div class="settings_cont">
+      <h2 class="form_title">Change Username</h2>
+      {% from 'includes/_formhelpers.html' import render_field%}
+
+      <form class="settings_form" action="" method="post">
+        {% if error %}
+        <p class="alert alert-danger"><strong>Error:</strong> {{ error }}
+        {% endif %}    
+            <div class="form-group ">
+              {{render_field(usn_form.username, class_="form-control")}}
+            </div>
+            <div class="form-group">
+              {{render_field(usn_form.new_username, class_="form-control")}}
+            </div>  
+
+        <input type="submit" value="Confirm" class="btn btn_custom">
+      </form>
+    </div>
+
+{% endblock %}
+
+        

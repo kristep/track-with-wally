@@ -1,0 +1,93 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block content %}
+
+    <!-- TOP NAVBAR -->
+    {% include 'includes/_navbar.html' %}
+
+
+    <div class="history_cont">
+      {% if transactions %}
+      <h3>History of transactions</h3>
+      <!-- history menu -->
+      <!-- onChange="this.submit();" -->
+        <form action="/select" method="post" class="history_menu"  > 
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="show_inc_exp">Show: {{ sel_show if sel_show != None else ''}} </label>
+            </div>
+            <select class="custom-select" id="show_inc_exp" name="sel_show" >
+              <option>Select...</option>
+              <option selected value="all">all</option>
+              <option value="inc">incomes</option>
+              <option value="exp">expenses</option>
+            </select>
+          </div>
+
+          <div class="input-group mb-3 history_menu_item">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="sort_by">Order by: {{ sel_order if sel_order != None else ''}}</label>
+            </div>
+            <select class="custom-select" id="sort_by" name="sel_order" >
+              <option>Select...</option>
+              <option selected value="date">date</option>
+              <!-- <option value="date(asc)">date (asscending)</option> -->
+              <option value="category">category</option>
+              <option value="amount">amount</option>
+              <!-- <option value="amount(asc)">amount (ascending)</option> -->
+            </select>
+          </div>
+          <button type="submit" class="btn btn_filter">Filter</button>
+        </form>   
+
+      <!-- main content (table) -->
+      <table class="table table-hover history_table">
+        <thead>
+          <tr>
+            <th scope="col">Category</th>
+            <th scope="col">Title</th>
+            <th scope="col">Amount &#8364</th>
+            <th scope="col">Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for trans in transactions %}
+          <tr>
+              <td data-categ="{{trans.category}}" class="category">
+                  {% if trans.category == 'food' %}
+                      Food & drinks
+                  {% elif trans.category == 'bills' %}
+                      Bills & utilities
+                  {% else %}
+                      {{trans.category.capitalize()}}
+                  {% endif %}                                
+              </td>
+              <td>{{trans.title}}</td>  
+              <td data-inc_exp="{{trans.inc_exp}}" class="inc_exp">
+                  {{trans.amount}}
+              </td>
+              <td>{{trans.date}}</td>
+              <td> 
+                  <form action="{{url_for('dashboard.delete', id=trans.id)}}" method="post">
+                      <input type="hidden" name="_method" value="DELETE" >
+                      <input type="submit" value="Delete" class="delete-btn" >
+                  </form>
+              </td>
+          </tr>
+      {% endfor %}
+
+        </tbody>
+      </table>
+      {% else %}
+        <h4>You don't have active transactions yet.</h4>
+      {% endif %}
+    </div>
+
+
+    
+
+{% endblock %}

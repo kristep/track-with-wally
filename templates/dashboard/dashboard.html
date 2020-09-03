@@ -1,0 +1,222 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Dashboard
+{% endblock %}
+
+{% block content %}
+
+    <!-- TOP NAVBAR -->
+    {% include 'includes/_navbar.html' %}
+    {% include 'includes/_messages.html' %}
+
+    <div class="dashboard">
+        <div class="balance">
+            <h2>Total balance: <span>{{'{:,}'.format(balance).replace(',', ' ')}}</span> &#8364</h2>
+            {% if error %}
+            <p class="alert alert-danger"> {{ error }}
+            {% endif %}            
+        </div>
+
+        <!-- EXPENSES CATEGORIES -->
+        <div class="exp_categ_container">
+            <div class="exp-food exp_categ">
+                <span>Food & drinks</span>
+                <i class="fas fa-utensils"></i>
+                <span><span class="exp_amount">{{expenses.food}}</span> &#8364</span>
+            </div>
+            <div class="exp-bills exp_categ">     
+                <span>Bills & utilities</span>
+                <i class="fas fa-home"></i>
+                <span><span class="exp_amount">{{expenses.bills}}</span> &#8364</span>
+            </div>
+            <div class="exp-transp exp_categ">
+                <span>Transport</span>
+                <i class="fas fa-car"></i>
+                <span><span class="exp_amount">{{expenses.transport}}</span> &#8364</span>
+            </div>
+            <div class="exp-clothes exp_categ">
+                <span>Clothes</span>
+                <i class="fas fa-tshirt"></i>
+                <span><span class="exp_amount">{{expenses.clothes}}</span> &#8364</span>
+            </div>
+            <div class="exp-household exp_categ">
+                <span>Household</span>
+                <i class="fas fa-couch"></i>
+                <span><span class="exp_amount">{{expenses.household}}</span> &#8364</span>
+            </div>
+            <div class="exp-entert exp_categ">
+                <span>Entertainment</span>
+                <i class="far fa-smile-beam"></i>
+                <span><span class="exp_amount">{{expenses.entertainment}}</span> &#8364</span>
+            </div>
+            <div class="exp-holidays exp_categ">
+                <span>Holidays</span>
+                <i class="fas fa-plane"></i>
+                <span><span class="exp_amount">{{expenses.holidays}}</span> &#8364</span>
+            </div>
+            <div class="exp-other exp_categ">
+                <span>Other</span>
+                <i class="fas fa-ellipsis-h"></i>
+                <span><span class="exp_amount">{{expenses.other}}</span> &#8364</span>
+            </div>
+        </div>
+        
+
+        <!-- EXPENSES FORM -->
+        <div class="exp_container">
+            <h4>Add expense</h4>
+            <form class="exp_form" action="/add_expense" method="post">
+                
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="exp_title">Title</label>
+                            <input type="text" class="form-control" id="exp_title" name="exp_title">
+                        </div>
+                        <div class="form-group">
+                            <label for="exp_amount">Amount</label>
+                            <input type="number" class="form-control" id="exp_amount" name="exp_amount" step=".01">
+                        </div> 
+                        <div class="form-group">
+                            <label for="exp_date">Date</label>
+                            <input type="date" class="form-control" id="exp_date" name="exp_date">
+                        </div>
+                    </div>
+
+                    <div class="col exp_radios">
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="expense_category" id="food" value="food">
+                                <label class="form-check-label" for="food">
+                                    <i class="fas fa-utensils"></i>
+                                    <span>Food & drinks</span>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="expense_category" id="bills" value="bills">
+                                <label class="form-check-label" for="bills">
+                                    <i class="fas fa-home"></i>
+                                    <span>Bills & utilities</span>
+                                </label>
+                            </div>                                  
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="expense_category" id="transport" value="transport">
+                                <label class="form-check-label" for="transport">
+                                    <i class="fas fa-car"></i>
+                                    <span>Transport</span>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="expense_category" id="clothes" value="clothes">
+                                <label class="form-check-label" for="clothes">
+                                    <i class="fas fa-tshirt"></i>
+                                    <span>Clothes</span>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="expense_category" id="household" value="household">
+                                <label class="form-check-label" for="household">
+                                    <i class="fas fa-couch"></i>
+                                    <span>Household</span>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="expense_category" id="entertainment" value="entertainment">
+                                <label class="form-check-label" for="entertainment">
+                                    <i class="far fa-smile-beam"></i>
+                                    <span>Entertainment</span>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="expense_category" id="holidays" value="holidays">
+                                <label class="form-check-label" for="holidays">
+                                    <i class="fas fa-plane"></i>
+                                    <span>Holidays</span>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="expense_category" id="other" value="other">
+                                <label class="form-check-label" for="other">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                    <span>Other</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+        </div>
+
+        <!-- INCOME FORM -->
+        <div class="inc_container">    
+            <h4>Add income</h4>        
+            <form class="inc_form" action="/add_income" method="post">
+              
+                <div class="form-group">
+                  <label for="inc_title">Title</label>
+                  <input type="text" class="form-control" id="inc_title" name="inc_title">
+                </div>
+                <div class="form-group">
+                  <label for="inc_amount">Amount</label>
+                  <input type="number" class="form-control" id="inc_amount" name="inc_amount" step=".01">
+                </div>
+                <div class="form-group">
+                    <label for="inc_date">Date</label>
+                    <input type="date" class="form-control" id="inc_date" name="inc_date"> 
+                  </div>
+                <button type="submit" class="btn btn-primary">Add</button>
+              </form>
+        </div>
+
+        <!-- RECENT TRANSACTIONS -->
+        <div class="recent_transact">
+            <h4>Recent transactions:</h4>
+            {% if transactions %}
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Category</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Amount &#8364</th>
+                    <th scope="col">Date</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for trans in transactions %}
+                        <tr>
+                            <td data-categ="{{trans.category}}" class="category">
+                                {% if trans.category == 'food' %}
+                                    Food & drinks
+                                {% elif trans.category == 'bills' %}
+                                    Bills & utilities
+                                {% else %}
+                                    {{trans.category.capitalize()}}
+                                {% endif %}                                
+                            </td>
+                            <td>{{trans.title}}</td>  
+                            <td data-inc_exp="{{trans.inc_exp}}" class="inc_exp">
+                                {{trans.amount}}
+                            </td>
+                            <td>{{trans.date}}</td>
+                            <td> 
+                                <form action="{{url_for('dashboard.delete', id=trans.id)}}" method="post">
+                                    <input type="hidden" name="_method" value="DELETE" >
+                                    <input type="submit" value="Delete" class="delete-btn" >
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+                <h4>You don't have active transactions yet.</h4>
+            {% endif %}
+        </div>
+    </div>        
+
+
+{% endblock %}
+

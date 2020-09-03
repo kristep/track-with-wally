@@ -1,0 +1,52 @@
+<div class="nav-wrapper">
+  <nav class="navbar navbar-light bg-light border-bottom top_nav">
+  <button class="btn" id="menu-toggle"><span class="navbar-toggler-icon"></span></button>
+
+
+
+
+<!-- <li class="dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <i class="fas fa-user"></i>
+    {{ username }}
+    </a>
+
+    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+        <li class="dropdown-submenu">
+            <a href="/account_settings" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">Account settings</span><span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="#">Change password</a></li>
+                <li><a href="#">Change username</a></li>
+            </ul>
+        </li>
+        <div class="dropdown-divider"></div>
+        <li><a class="dropdown-item" href="/logout">Logout</a> </li>
+    </ul>
+</li> -->
+
+
+
+  <div class="dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <i class="fas fa-user"></i>
+      {{ username }}
+      </a>
+
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+        <div class="dropdown-item dropdown-submenu">Account settings
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item change" href="/change_username">Change username</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item change" href="/change_password">Change password</a>
+        </div>
+        
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item clear_all" href="/clear_all">Clear all data</a>
+        <div class="dropdown-divider"></div>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/logout">Logout</a>
+      </div>
+  </div>
+  </nav>
+</div>
